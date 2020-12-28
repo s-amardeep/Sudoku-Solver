@@ -96,7 +96,6 @@ button.onclick = function () {
     xhrRequest.send()
 }
 
-//to be completed by student
 function isPossible(board, sr, sc, val) {
     for (var row = 0; row < 9; row++) {
         if (board[row][sc] == val) {
@@ -124,17 +123,19 @@ function isPossible(board, sr, sc, val) {
 
 }
 
-//to be completed by student
+//Algorithm
 function solveSudokuHelper(board, sr, sc) {
+    //Base Case
     if (sr == 9) {
         changeBoard(board);
         return;
     }
+    //Other Cases
     if (sc == 9) {
         solveSudokuHelper(board, sr + 1, 0)
         return;
     }
-
+    //If Pre Filled Cell then Skip it
     if (board[sr][sc] != 0) {
         solveSudokuHelper(board, sr, sc + 1);
         return;
@@ -144,6 +145,7 @@ function solveSudokuHelper(board, sr, sc) {
         if (isPossible(board, sr, sc, i)) {
             board[sr][sc] = i;
             solveSudokuHelper(board, sr, sc + 1);
+            //Backtracking Step
             board[sr][sc] = 0;
         }
     }
